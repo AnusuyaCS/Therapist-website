@@ -23,7 +23,7 @@ function ColumnHeading({ children }: { children: React.ReactNode }) {
 
 export function Footer() {
   return (
-    <footer id="contact" className="bg-background">
+    <footer className="bg-background">
       <div className="grid gap-12 px-6 py-16 md:grid-cols-2 md:px-[6%] lg:grid-cols-[38%_15%_19%_1fr] lg:gap-0 lg:px-0 lg:pt-[60px] lg:pb-[70px] lg:pl-[6.7%]">
         <div className="lg:pt-[42px]">
           <BrandMark size="lg" />

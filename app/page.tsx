@@ -10,6 +10,7 @@ import { Specialties } from '@/components/site/specialties'
 import { Schedule } from '@/components/site/schedule'
 import { Office } from '@/components/site/office'
 import { Faqs } from '@/components/site/faqs'
+import { Contact } from '@/components/site/contact'
 import { Footer } from '@/components/site/footer'
 
 export default function Page() {
@@ -28,6 +29,7 @@ export default function Page() {
         <Schedule />
         <Office />
         <Faqs />
+        <Contact />
       </main>
       <Footer />
     </>
