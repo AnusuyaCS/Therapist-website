@@ -22,28 +22,77 @@ const script = Mrs_Saint_Delafield({
   variable: '--font-script-face',
 })
 
+const siteUrl = 'https://therapist-website-anu-6fb1.vercel.app'
+
 export const metadata: Metadata = {
-  title: 'Anxiety & Trauma Therapy in Santa Monica, CA | Dr. Maya Reynolds, PsyD',
+  metadataBase: new URL(siteUrl),
+
+  title: {
+    default: 'Anxiety & Trauma Therapy in Santa Monica | Dr. Maya Reynolds',
+    template: '%s | Dr. Maya Reynolds, PsyD',
+  },
+
   description:
-    'Dr. Maya Reynolds, PsyD is a licensed clinical psychologist in Santa Monica, CA offering anxiety, panic, trauma, EMDR, and burnout therapy for adults. In-person sessions and telehealth across California.',
+    'Explore compassionate therapy for anxiety, panic, trauma, and burnout with Dr. Maya Reynolds, PsyD. In-person sessions in Santa Monica and telehealth across California.',
+
+  applicationName: 'Dr. Maya Reynolds Therapy',
+
+  authors: [{ name: 'Anusuya Pal' }],
+  creator: 'Anusuya Pal',
+
+  alternates: {
+    canonical: '/',
+  },
+
   keywords: [
-    'therapist Santa Monica',
+    'therapist in Santa Monica',
     'anxiety therapy Santa Monica',
-    'trauma therapist Santa Monica',
-    'EMDR therapy Santa Monica',
+    'trauma therapy Santa Monica',
+    'EMDR therapist Santa Monica',
+    'panic attack therapy',
     'burnout therapy Los Angeles',
-    'psychologist Santa Monica CA',
+    'psychologist Santa Monica California',
     'online therapy California',
+    'cognitive behavioral therapy',
+    'mindfulness-based therapy',
   ],
-  generator: 'v0.app',
+
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+
   openGraph: {
-    title: 'Anxiety & Trauma Therapy in Santa Monica | Dr. Maya Reynolds, PsyD',
-    description:
-      'Warm, grounded therapy for adults navigating anxiety, panic, trauma, and burnout. In-person in Santa Monica and telehealth across California.',
     type: 'website',
     locale: 'en_US',
+    url: '/',
+    siteName: 'Dr. Maya Reynolds Therapy',
+    title: 'Anxiety & Trauma Therapy in Santa Monica | Dr. Maya Reynolds',
+    description:
+      'Compassionate, personalized therapy for anxiety, panic, trauma, and burnout. In-person in Santa Monica and telehealth across California.',
+    images: [
+      {
+        url: '/images/office-sunlit.jpeg',
+        alt: 'A warm, sunlit therapy office',
+      },
+    ],
+  },
+
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Anxiety & Trauma Therapy | Dr. Maya Reynolds',
+    description:
+      'Explore therapy for anxiety, trauma, panic, and burnout in Santa Monica and online across California.',
     images: ['/images/office-sunlit.jpeg'],
   },
+
   icons: {
     icon: [
       {
@@ -65,26 +114,56 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: '#f3ede4',
+  width: 'device-width',
+  initialScale: 1,
 }
 
-const jsonLd = {
-  '@context': 'https://schema.org',
-  '@type': 'Psychologist',
-  name: 'Dr. Maya Reynolds, PsyD',
-  description:
-    'Licensed clinical psychologist in Santa Monica, California offering therapy for anxiety, panic, trauma, and burnout. In-person and telehealth sessions.',
-  image: '/images/dr-maya-reynolds.png',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: '123th Street 45 W',
-    addressLocality: 'Santa Monica',
-    addressRegion: 'CA',
-    postalCode: '90401',
-    addressCountry: 'US',
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'Dr. Maya Reynolds Therapy',
+    url: siteUrl,
+    creator: {
+      '@type': 'Person',
+      name: 'Anusuya Pal',
+    },
+    inLanguage: 'en-US',
   },
-  areaServed: ['Santa Monica', 'Los Angeles', 'California'],
-  knowsAbout: ['Anxiety', 'Panic', 'Trauma', 'EMDR', 'CBT', 'Burnout', 'Perfectionism', 'Mindfulness'],
-}
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Psychologist',
+    name: 'Dr. Maya Reynolds, PsyD',
+    description:
+      'Therapy services for anxiety, panic, trauma, and burnout, with in-person sessions in Santa Monica and telehealth across California.',
+    image: `${siteUrl}/images/dr-maya-reynolds.png`,
+    url: siteUrl,
+    areaServed: [
+      {
+        '@type': 'City',
+        name: 'Santa Monica',
+      },
+      {
+        '@type': 'AdministrativeArea',
+        name: 'Los Angeles County',
+      },
+      {
+        '@type': 'State',
+        name: 'California',
+      },
+    ],
+    knowsAbout: [
+      'Anxiety',
+      'Panic',
+      'Trauma',
+      'EMDR',
+      'Cognitive Behavioral Therapy',
+      'Burnout',
+      'Perfectionism',
+      'Mindfulness',
+    ],
+  },
+]
 
 export default function RootLayout({
   children,
@@ -92,10 +171,23 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${mulish.variable} ${newsreader.variable} ${script.variable}`}>
+    <html
+      lang="en"
+      className={`${mulish.variable} ${newsreader.variable} ${script.variable}`}
+    >
       <body className="antialiased">
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+        {structuredData.map((data, index) => (
+          <script
+            key={index}
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(data).replace(/</g, '\\u003c'),
+            }}
+          />
+        ))}
+
         {children}
+
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
