@@ -8,6 +8,7 @@ import { Approach } from '@/components/site/approach'
 import { Statement } from '@/components/site/statement'
 import { Specialties } from '@/components/site/specialties'
 import { Schedule } from '@/components/site/schedule'
+import { Office } from '@/components/site/office'
 import { Faqs } from '@/components/site/faqs'
 import { Footer } from '@/components/site/footer'
 
@@ -25,6 +26,7 @@ export default function Page() {
         <Statement />
         <Specialties />
         <Schedule />
+        <Office />
         <Faqs />
       </main>
       <Footer />
