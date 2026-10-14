@@ -10,6 +10,9 @@ import { Specialties } from '@/components/site/specialties'
 import { Schedule } from '@/components/site/schedule'
 import { Faqs } from '@/components/site/faqs'
 import { Footer } from '@/components/site/footer'
+import { Office } from '@/components/site/office'
+import { ContactForm } from '@/components/site/contact-form'
+import { Contact } from '@/components/site/contact'
 
 export default function Page() {
   return (
@@ -25,6 +28,9 @@ export default function Page() {
         <Statement />
         <Specialties />
         <Schedule />
+        <Office />
+        <Contact/>
+        {/* <ContactForm /> */}
         <Faqs />
       </main>
       <Footer />
